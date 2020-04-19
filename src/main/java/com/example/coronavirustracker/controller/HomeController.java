@@ -1,5 +1,6 @@
 package com.example.coronavirustracker.controller;
 
+import com.example.coronavirustracker.model.GlobalStats;
 import com.example.coronavirustracker.model.LocationStats;
 import com.example.coronavirustracker.service.CoronaVirusDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,10 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model){
 		List<LocationStats> allStats = coronaVirusDataService.getAllStats();
-		int totalReportedCases = allStats.stream().mapToInt(LocationStats::getLatestTotalCases).sum();
-		int totalNewCases = allStats.stream().mapToInt(LocationStats::getDiffFromPrevDay).sum();
+		GlobalStats globalStats = coronaVirusDataService.getGlobalStats();
 		model.addAttribute("locationStats",allStats);
-		model.addAttribute("totalReportedCases",totalReportedCases);
-		model.addAttribute("totalNewCases",totalNewCases);
+		model.addAttribute("globalStats",globalStats);
+		//model.addAttribute("totalNewCases",totalNewCases);
 		return "home";
 	}
 }

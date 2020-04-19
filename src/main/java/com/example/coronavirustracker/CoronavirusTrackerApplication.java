@@ -24,6 +24,7 @@ public class CoronavirusTrackerApplication {
 	}
 
 	@Bean
+	// hit this {base url}/swagger-ui.html to open API documentation.
 	public Docket swaggerConfiguration(){
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
